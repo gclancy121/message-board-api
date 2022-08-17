@@ -11,4 +11,6 @@ A waifu collecting API that my message board will use - users must be logged in 
 --- Waifu Endpoints ---
 [GET] - /waifus: Allows logged in users to access all waifus. If you do not go through the login process, you will be locked out and not allowed to access.
 
-[POST] - /waifus: Allows users to post a new waifu to the databse. Payload must look like this: {waifu_name: "name", waifu_description: "description"}. Will throw error messages if any part of the payload is incorrect. 
+[POST] - /waifus: Allows users to post a new waifu to the database. Payload must look like this: {waifu_name: "name", waifu_description: "description"}. Will throw error messages if any part of the payload is incorrect. 
+
+A few waifus have been included by default. You can find their seed data in /data/seeds/create_waifu_data. 

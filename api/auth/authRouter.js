@@ -11,7 +11,7 @@ router.post('/register', checkPayload, checkUsernameTaken, (req, res, next) => {
     user.password = hash;
 
     Users.addUser(user).then(result => {
-        res.status(201).json(result);
+        res.status(201).json({message: `Welcome to Weeb Central, ${result.username}!`, ...result});
     }).catch(err => next(err));
 })
 
