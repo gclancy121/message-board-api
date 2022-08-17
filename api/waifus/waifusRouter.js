@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const waifus = require('./waifuData');
+const waifus = require('./waifuModel');
 
 router.get('/', (req, res) => {
     res.status(200).json(waifus);

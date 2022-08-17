@@ -15,6 +15,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "sever": "nodemon index.js"
+    "server": "nodemon index.js"
   }
 }
