@@ -12,6 +12,8 @@ IMPORTANT: No user data is created by default - you must create your own with th
 --- Waifu Endpoints ---
 [GET] - /waifus: Allows logged in users to access all waifus. 
 
+[GET] - /waifus/id: Fetch a waifu via specific ID. Payload must look like this: {id: "id"}.
+
 [POST] - /waifus: Allows users to post a new waifu to the database. Payload must look like this: {waifu_name: "name", waifu_description: "description"}. Will throw error messages if any part of the payload is incorrect. 
 
 A few waifus have been included by default. You can find their seed data in /data/seeds/create_waifu_data. 

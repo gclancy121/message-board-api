@@ -13,8 +13,13 @@ function findByName(name) {
     return db('waifus').where('waifu_name', name).first();
 }
 
+function findById(id) {
+    return db('waifus').where('waifu_id', id).first();
+}
+
 module.exports = {
     fetchData,
     addData,
     findByName,
+    findById,
 }
