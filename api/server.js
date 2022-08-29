@@ -1,17 +1,18 @@
 const express = require('express');
 const helmet = require('helmet');
-
-const restricted = require('./auth/restricted');
+const cors = require('cors');
 
 const waifuRouter = require('./waifus/waifusRouter');
 const authRouter = require('./auth/authRouter');
 
 const server = express();
+server.use(cors());
 server.use(helmet());
 server.use(express.json());
 
+
 server.use('/auth', authRouter);
-server.use('/waifus', restricted, waifuRouter);
+server.use('/waifus', waifuRouter);
 
 server.use((err, req, res, next) => {
     res.status(err.status || 500).json({message: err.message, stack: err.stack});

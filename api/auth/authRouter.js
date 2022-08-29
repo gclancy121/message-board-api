@@ -22,7 +22,7 @@ router.post('/login', checkPayload, (req, res, next) => {
             const token = generateToken(user);
             res.status(200).json({token: token, message: `Welcome back to Weeb Central, ${username}!`});
         } else {
-            res.status(401).json({message: "Gotta be logged in to see that one, chief."});
+            res.status(401).json({message: "Hey, that information is invalid! Fix it!"});
         }
     }).catch(err => next(err));
 })
@@ -33,7 +33,7 @@ function generateToken(user) {
         username: user.username
     };
     const options = {
-        expiresIn: '1hour',
+        expiresIn: '10seconds',
     };
     return jwt.sign(payload, 'sachi komine', options);
 }

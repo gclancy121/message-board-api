@@ -18,7 +18,7 @@ function checkPayload(req, res, next) {
         res.status(400).json({message: "You need a username and a password baka! Gotta keep safe in these times."})
         return;
     }
-    if (password == null || username.trim() === '') {
+    if (password == null || password.trim() === '') {
         res.status(400).json({message: "You need a username and a password baka! Gotta keep safe in these times."})
         return;
     }
