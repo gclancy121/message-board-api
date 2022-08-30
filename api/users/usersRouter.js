@@ -2,8 +2,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const router = require('express').Router();
-const Users = require('../users/usersModel');
-const {checkUsernameTaken, checkPayload, checkDeletePossible} = require('./authMiddleware');
+const Users = require('./usersModel');
+const {checkUsernameTaken, checkPayload, checkDeletePossible} = require('./usersMiddleware');
 
 router.get('/', (req, res, next) => {
     Users.findAll().then(result => {
@@ -14,6 +14,14 @@ router.get('/', (req, res, next) => {
 router.get('/:username', (req, res, next) => {
     const username = req.params.username;
     Users.findByUsername(username).then(result => {
+        res.status(200).json(result);
+    })
+})
+
+router.put('/:id', (req, res, next) => {
+    const id = req.params.id;
+    const changes = req.body;
+    Users.updateUser(id, changes).then(result => {
         res.status(200).json(result);
     })
 })
@@ -46,6 +54,7 @@ router.delete("/:id", checkDeletePossible, (req, res, next) => {
         res.status(200).json(result);
     })
 })
+
 
 function generateToken(user) {
     const payload = {

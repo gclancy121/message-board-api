@@ -20,6 +20,11 @@ function removeUser(id) {
     return db('users').where('user_id', id).del();
 }
 
+async function updateUser(id, changes) {
+    await db('users').where('user_id', id).update(changes);
+    return findById(id);
+}
+
 
 module.exports = {
     findAll,
@@ -27,4 +32,5 @@ module.exports = {
     addUser,
     findByUsername,
     removeUser,
+    updateUser,
 }

@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 const waifuRouter = require('./waifus/waifusRouter');
-const authRouter = require('./auth/authRouter');
+const usersRouter = require('./users/usersRouter');
 
 const server = express();
 server.use(cors());
@@ -11,7 +11,7 @@ server.use(helmet());
 server.use(express.json());
 
 
-server.use('/auth', authRouter);
+server.use('/users', usersRouter);
 server.use('/waifus', waifuRouter);
 
 server.use((err, req, res, next) => {

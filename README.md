@@ -4,15 +4,17 @@ A waifu collecting API that my message board will use - users must be logged in 
 --- User Endpoints ---
 IMPORTANT: No user data is created by default - you must create your own with the correct information. 
 
-[GET] - /auth: Get a list of all current users. 
+[GET] - /users: Get a list of all current users. 
 
-[GET] - /auth/:username: Returns all information about a specific username.
+[GET] - /users/:username: Returns all information about a specific username.
 
-[POST] - /auth/register: Allows a user to add their credentials to a database, allowing them to log in and access the waifus. Payload must look like this: {username: "username", password: "password"}. Will throw error messages if any part of the payload is incorrect. 
+[PUT] - /users/:id: Allows a user to update their profile and returns the updated user profile. 
 
-[POST] - /auth/login: Allows a user to log in, responds with a token and a login message. Payload must look like this: {username: "username", password: "password"}. Will throw error messages if any part of the payload is incorrect. 
+[POST] - /users/register: Allows a user to add their credentials to a database, allowing them to log in and access the waifus. Payload must look like this: {username: "username", password: "password"}. Will throw error messages if any part of the payload is incorrect. 
 
-[DELETE] - /auth/:id: Allows a user to delete their own account. Responds with either a 1 or a 0 - 1 if successful, 0 if unsuccessful. 
+[POST] - /users/login: Allows a user to log in, responds with a token and a login message. Payload must look like this: {username: "username", password: "password"}. Will throw error messages if any part of the payload is incorrect. 
+
+[DELETE] - /users/:id: Allows a user to delete their own account. Responds with either a 1 or a 0 - 1 if successful, 0 if unsuccessful. 
 
 --- Waifu Endpoints ---
 [GET] - /waifus: Allows users to access all waifus. 

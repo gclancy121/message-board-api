@@ -17,6 +17,7 @@ function findById(id) {
     return db('waifus').where('waifu_id', id).first();
 }
 
+
 module.exports = {
     fetchData,
     addData,
