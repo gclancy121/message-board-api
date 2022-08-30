@@ -12,8 +12,8 @@ router.get('/', (req, res, next) => {
 })
 
 
-router.get('/id', (req, res, next) => {
-   const id = req.body.id;
+router.get('/:id', (req, res, next) => {
+   const id = req.params.id;
    Waifu.findById(id).then(result => {
     res.status(200).json(result);
    })

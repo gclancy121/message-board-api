@@ -3,7 +3,20 @@ const jwt = require('jsonwebtoken');
 
 const router = require('express').Router();
 const Users = require('../users/usersModel');
-const {checkUsernameTaken, checkPayload} = require('./authMiddleware');
+const {checkUsernameTaken, checkPayload, checkDeletePossible} = require('./authMiddleware');
+
+router.get('/', (req, res, next) => {
+    Users.findAll().then(result => {
+        res.status(200).json(result);
+    })
+})
+
+router.get('/:username', (req, res, next) => {
+    const username = req.params.username;
+    Users.findByUsername(username).then(result => {
+        res.status(200).json(result);
+    })
+})
 
 router.post('/register', checkPayload, checkUsernameTaken, (req, res, next) => {
     let user = req.body;
@@ -27,13 +40,20 @@ router.post('/login', checkPayload, (req, res, next) => {
     }).catch(err => next(err));
 })
 
+router.delete("/:id", checkDeletePossible, (req, res, next) => {
+    const id = req.params.id;
+    Users.removeUser(id).then(result => {
+        res.status(200).json(result);
+    })
+})
+
 function generateToken(user) {
     const payload = {
         subject: user.user_id,
         username: user.username
     };
     const options = {
-        expiresIn: '10seconds',
+        expiresIn: '1day',
     };
     return jwt.sign(payload, 'sachi komine', options);
 }
