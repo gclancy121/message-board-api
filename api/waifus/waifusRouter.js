@@ -16,14 +16,14 @@ router.get('/:id', (req, res, next) => {
    const id = req.params.id;
    Waifu.findById(id).then(result => {
     res.status(200).json(result);
-   })
+   }).catch(err => next(err));
     
 })
 
 router.post('/', checkPayloadValid, checkWaifuAlreadyExists, (req, res, next) => {
     Waifu.addData(req.body).then(result => {
         res.status(201).json(result);
-    })
+    }).catch(err => next(err));
 })
 
 

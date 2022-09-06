@@ -8,14 +8,14 @@ const {checkUsernameTaken, checkPayload, checkDeletePossible} = require('./users
 router.get('/', (req, res, next) => {
     Users.findAll().then(result => {
         res.status(200).json(result);
-    })
+    }).catch(err => next(err));
 })
 
 router.get('/:username', (req, res, next) => {
     const username = req.params.username;
     Users.findByUsername(username).then(result => {
         res.status(200).json(result);
-    })
+    }).catch(err => next(err));
 })
 
 router.put('/:id', (req, res, next) => {
@@ -23,7 +23,7 @@ router.put('/:id', (req, res, next) => {
     const changes = req.body;
     Users.updateUser(id, changes).then(result => {
         res.status(200).json(result);
-    })
+    }).catch(err => next(err));
 })
 
 router.post('/register', checkPayload, checkUsernameTaken, (req, res, next) => {
