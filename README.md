@@ -28,4 +28,4 @@ IMPORTANT: No user data is created by default - you must create your own with th
 --Posts Endpoints ---
 None currently implemented. Will add database for that soon.
 
-A few waifus have been included by default. You can find their seed data in /data/seeds/create_waifu_data. 
+To give an example of how waifu data is stored, there are a few examples in /data/seeds/create_waifu_data. Use the generated information as a guide for how the rest of the waifus must look. 

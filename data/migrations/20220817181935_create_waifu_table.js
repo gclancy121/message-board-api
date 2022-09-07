@@ -4,6 +4,9 @@ exports.up = function(knex) {
     waifu.increments('waifu_id');
     waifu.string('waifu_name', 50).unique().notNullable();
     waifu.string('waifu_description', 128).notNullable();
+    waifu.string('waifu_birth_month').defaultTo('');
+    waifu.string('waifu_birth_day').defaultTo('');
+    waifu.string('waifu_picture').notNullable();
   })
 };
 
