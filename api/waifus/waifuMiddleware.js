@@ -10,7 +10,16 @@ async function checkWaifuAlreadyExists(req, res, next) {
         next();
     })
 }
-
+async function checkSearchExists(req, res, next) {
+    const name = req.params.name;
+    await Waifus.findByNameArray(name).then(result => {
+        if (result == null) {
+            res.status(400).json({message: "invalid search param"});
+            return;
+        }
+        next();
+    })
+}
 function checkPayloadValid(req, res, next) {
     const name = req.body.waifu_name;
     const description = req.body.waifu_description;
@@ -36,4 +45,5 @@ function checkPayloadValid(req, res, next) {
 module.exports = {
     checkPayloadValid,
     checkWaifuAlreadyExists,
+    checkSearchExists,
 }

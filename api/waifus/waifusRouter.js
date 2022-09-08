@@ -1,7 +1,7 @@
 //returning the waifus as a dataset
 const express = require('express');
 const Waifu = require('./waifuModel');
-const {checkPayloadValid, checkWaifuAlreadyExists} = require('./waifuMiddleware');
+const {checkPayloadValid, checkWaifuAlreadyExists, checkSearchExists} = require('./waifuMiddleware');
 
 const router = express.Router();
 
@@ -11,8 +11,14 @@ router.get('/', (req, res, next) => {
     }).catch(err => next(err));
 })
 
+router.get('/:name', checkSearchExists, (req, res, next) => {
+    const name = req.params.name
+    Waifu.findByNameArray(name).then(result => {
+        res.status(200).json(result);
+    }).catch(err => next(err));
+})
 
-router.get('/:id', (req, res, next) => {
+router.get('/id/:id', (req, res, next) => {
    const id = req.params.id;
    Waifu.findById(id).then(result => {
     res.status(200).json(result);
