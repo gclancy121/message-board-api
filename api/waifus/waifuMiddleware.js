@@ -10,6 +10,7 @@ async function checkWaifuAlreadyExists(req, res, next) {
         next();
     })
 }
+
 async function checkSearchExists(req, res, next) {
     const name = req.params.name;
     await Waifus.findByNameArray(name).then(result => {
@@ -20,6 +21,7 @@ async function checkSearchExists(req, res, next) {
         next();
     })
 }
+
 function checkPayloadValid(req, res, next) {
     const name = req.body.waifu_name;
     const description = req.body.waifu_description;

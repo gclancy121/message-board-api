@@ -9,15 +9,22 @@ async function addData(post) {
     return post;
 }
 
+function updateData(id, changes) {
+    return db('waifus').where('waifu_id', id).update(changes);
+}
+
 function findByName(name) {
     return db('waifus').where('waifu_name', name).first();
 }
+
 function findByNameArray(name) {
     return db('waifus').where('waifu_name', 'like', `%${name}%`);
 }
+
 function findById(id) {
     return db('waifus').where('waifu_id', id).first();
 }
+
 
 module.exports = {
     fetchData,
@@ -25,4 +32,5 @@ module.exports = {
     findByName,
     findById,
     findByNameArray,
+    updateData,
 }

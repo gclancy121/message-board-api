@@ -17,9 +17,11 @@ IMPORTANT: No user data is created by default - you must create your own with th
 [DELETE] - /users/:id: Allows a user to delete their own account. Responds with either a 1 or a 0 - 1 if successful, 0 if unsuccessful. 
 
 --- Waifu Endpoints ---
-[GET] - /waifus: Allows users to access all waifus. 
+[GET] - /waifus: Allows users to access all waifus.
 
-[GET] - /waifus/:id : Fetch a waifu via specific ID.
+[GET] - /waifus/:name: Fetch a waifu via a specific name. Name must be in params.
+
+[GET] - /waifus/id/:id : Fetch a waifu via specific ID. ID must be in params. 
 
 [POST] - /waifus: Allows users to post a new waifu to the database. Payload must look like this: {waifu_name: "name", waifu_description: "description"}. Will throw error messages if any part of the payload is incorrect. 
 

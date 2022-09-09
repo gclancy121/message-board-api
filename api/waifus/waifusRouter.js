@@ -26,6 +26,14 @@ router.get('/id/:id', (req, res, next) => {
     
 })
 
+router.put('/id/:id', (req, res, next) => {
+    const id = req.params.id;
+    const changes = req.body;
+    Waifu.updateData(id, changes).then(result => {
+        res.status(200).json(result);
+    }).catch(err => next(err));
+})
+
 router.post('/', checkPayloadValid, checkWaifuAlreadyExists, (req, res, next) => {
     Waifu.addData(req.body).then(result => {
         res.status(201).json(result);
