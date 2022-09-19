@@ -62,9 +62,9 @@ function generateToken(user) {
         username: user.username
     };
     const options = {
-        expiresIn: '1day',
+        expiresIn: 100000,
     };
-    return jwt.sign(payload, 'sachi komine', options);
+    return jwt.sign(payload, 'i love sachi komine', options);
 }
 
 module.exports = router;
