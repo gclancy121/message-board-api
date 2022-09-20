@@ -17,7 +17,11 @@ router.get('/:username', (req, res, next) => {
         res.status(200).json(result);
     }).catch(err => next(err));
 })
-
+router.patch('/:id', (req, res, next) => {
+    const id = req.params.id;
+    console.log(req.body);
+    console.log(id);
+})
 router.put('/:id', (req, res, next) => {
     const id = req.params.id;
     const changes = req.body;

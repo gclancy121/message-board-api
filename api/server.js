@@ -1,15 +1,20 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 const waifuRouter = require('./waifus/waifusRouter');
 const usersRouter = require('./users/usersRouter');
 const complaintsRouter = require('./complaints/complaintsRouter');
 
 const server = express();
+server.use(fileUpload({
+    createParentPath: true
+}));
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
+
 
 
 server.use('/users', usersRouter);

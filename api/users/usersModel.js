@@ -24,7 +24,12 @@ async function updateUser(id, changes) {
     await db('users').where('user_id', id).update(changes);
     return findById(id);
 }
-
+async function updatePicture(id, picture) {
+    await db('users').where('user_id', id).update({
+        profile_picture: picture
+    });
+    return findById(id);
+}
 
 module.exports = {
     findAll,
@@ -33,4 +38,5 @@ module.exports = {
     findByUsername,
     removeUser,
     updateUser,
+    updatePicture,
 }
