@@ -25,10 +25,12 @@ async function updateUser(id, changes) {
     return findById(id);
 }
 async function updatePicture(id, picture) {
-    await db('users').where('user_id', id).update({
-        profile_picture: picture
-    });
-    return findById(id);
+    console.log(id);
+    console.log(picture);
+    // await db('users').where('user_id', id).update({
+    //     profile_picture: picture
+    // });
+    // return findById(id);
 }
 
 module.exports = {
