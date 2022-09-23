@@ -13,8 +13,13 @@ async function addPost(post) {
     return findById(id);
 }
 
+function findPosterName(creator_id) {
+    return db('users').where('user_id', creator_id).first();
+}
+
 module.exports = {
     findById,
     addPost,
     fetchPosts,
+    findPosterName,
 }
