@@ -11,6 +11,13 @@ router.get('/', (req, res, next) => {
     }).catch(err => next(err));
 })
 
+router.get('/byid/:id', (req, res, next) => {
+    const id = req.params.id;
+    Users.findById(id).then(result => {
+        res.status(200).json(result);
+    })
+})
+
 router.get('/:username', (req, res, next) => {
     const username = req.params.username;
     Users.findByUsername(username).then(result => {
@@ -31,7 +38,7 @@ router.post('/register', checkPayload, checkUsernameTaken, (req, res, next) => {
     user.password = hash;
 
     Users.addUser(user).then(result => {
-        res.status(201).json({message: `Welcome to Weeb Central, ${result.username}!`, ...result});
+        res.status(201).json({message: `Welcome to Game Central, ${result.username}!`, ...result});
     }).catch(err => next(err));
 })
 
@@ -40,7 +47,7 @@ router.post('/login', checkPayload, (req, res, next) => {
     Users.findByUsername(username).then(user => {
         if (user && bcrypt.compareSync(password, user.password)) {
             const token = generateToken(user);
-            res.status(200).json({token: token, message: `Welcome back to Weeb Central, ${username}!`});
+            res.status(200).json({token: token, message: `Welcome back to Game Central, ${username}!`});
         } else {
             res.status(401).json({message: "Hey, that information is invalid! Fix it!"});
         }

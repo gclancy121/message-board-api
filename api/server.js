@@ -8,6 +8,7 @@ const waifuRouter = require('./waifus/waifusRouter');
 const usersRouter = require('./users/usersRouter');
 const complaintsRouter = require('./complaints/complaintsRouter');
 const postsRouter = require('./posts/postsRouter');
+const commentsRouter = require('./comments/commentsRouter');
 
 //Server setup
 const server = express();
@@ -21,6 +22,7 @@ server.use('/users', usersRouter);
 server.use('/waifus', waifuRouter);
 server.use('/complaints', complaintsRouter);
 server.use('/posts', postsRouter);
+server.use('/comments', commentsRouter);
 
 server.use((err, req, res, next) => {
     res.status(err.status || 500).json({message: err.message, stack: err.stack});
