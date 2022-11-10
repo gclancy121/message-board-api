@@ -7,9 +7,9 @@ exports.up = function(knex) {
     user.increments('user_id');
     user.string('username', 50).unique().notNullable();
     user.string('password', 128).notNullable();
-    user.string('about_me', 3000).notNullable().defaultTo("I'm a new gamer and haven't changed this yet.");
-    user.string('profile_picture').notNullable().defaultTo('https://st2.depositphotos.com/6027554/9528/v/950/depositphotos_95282974-stock-illustration-tetris-block-background-with-i.jpg');
-    user.string('fav_waifu').notNullable().defaultTo('Tetris');
+    user.string('about_me', 3000).notNullable().defaultTo("I'm a new weeblet and haven't changed this yet.");
+    user.string('profile_picture').notNullable().defaultTo('https://i.pinimg.com/736x/ba/a2/4e/baa24e0fbad55140f9103dcfc44894b0.jpg');
+    user.string('fav_waifu').notNullable().defaultTo('Yuuki Asuna');
   })
 };
 

@@ -4,7 +4,7 @@ async function checkUsernameTaken(req, res, next) {
     const username = req.body.username;
     await Users.findByUsername(username).then(result => {
         if (result != null) {
-            res.status(400).json({message: 'A gamer has already stolen your idea, buddy. New username needed.'})
+            res.status(400).json({message: 'A weeblet has already stolen your idea, buddy. New username needed.'})
             return;
         }
     next();

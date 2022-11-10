@@ -4,6 +4,9 @@ The entire API that my message board will use - users must be logged in to acces
 This API is designed to be used with the matching frontend application. Find it here:
 https://github.com/gclancy121/message-board-frontend
 
+How to Start: 
+Go to the terminal and type "npm run start". The server will start without issue.
+
 --- User Endpoints ---
 IMPORTANT: No user data is created by default - you must create your own with the correct information. 
 
@@ -30,7 +33,7 @@ IMPORTANT: No user data is created by default - you must create your own with th
 
 [DELETE] - /waifus/:id: Not currently implemented. Will allow users to delete a specific waifu at a specified ID. 
 
---Posts Endpoints ---
+--- Posts Endpoints ---
 [GET] - /posts: Allows users to access all posts.
 
 [GET] - /posts/:post_id: Allows users to access a specific post using the post ID.
@@ -38,5 +41,10 @@ IMPORTANT: No user data is created by default - you must create your own with th
 [POST] - /posts/addpost: Allows users to create a new post. 
 
 [GET] - /posts/get-creator/:id: Fetch the username of the creator of a specific post.
+
+--- Comment Endpoints ---
+[GET] - /comments/:id - Fetches the comments on a post via the post_id.
+
+[POST] - /comments/ - Posts a new comment on the post. 
 
 To give an example of how waifu data is stored, there are a few examples in /data/seeds/create_waifu_data. Use the generated information as a guide for how the rest of the waifus must look. 
