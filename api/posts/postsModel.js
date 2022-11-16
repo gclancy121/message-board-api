@@ -17,9 +17,14 @@ function findPosterName(creator_id) {
     return db('users').where('user_id', creator_id).first();
 }
 
+function findAllPostsByUser(user_id) {
+    return db('posts').where('created_by', user_id);
+}
+
 module.exports = {
     findById,
     addPost,
     fetchPosts,
     findPosterName,
+    findAllPostsByUser,
 }

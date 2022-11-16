@@ -7,6 +7,13 @@ router.get('/', (req, res, next) => {
     }).catch(err => next(err));
 })
 
+router.get('/post-num/:id', (req, res, next) => {
+    const id = req.params.id;
+    Posts.findAllPostsByUser(id).then(result => {
+        res.status(200).json({message: 'Post fetching successful', user_post_num: result.length});
+    }).catch(err => next(err));
+})
+
 router.get('/:post_id', (req, res, next) => {
     const post_id = req.params.post_id;
     Posts.findById(post_id).then(result => {
