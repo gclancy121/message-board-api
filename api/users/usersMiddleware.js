@@ -33,6 +33,15 @@ async function checkUsernameExists(req, res, next) {
     })
 }
 
+function checkQuestionAnswer(req, res, next) {
+    const {security_question_answer} = req.body;
+    if (security_question_answer == null || security_question_answer.trim() === '') {
+        res.status(400).json({message: "You have to answer the security question!"})
+        return;
+    }
+    next();
+}
+
 function checkPayload(req, res, next) {
     const username = req.body.username;
     const password = req.body.password;
@@ -52,4 +61,5 @@ module.exports = {
     checkUsernameTaken,
     checkPayload,
     checkDeletePossible,
+    checkQuestionAnswer,
 }

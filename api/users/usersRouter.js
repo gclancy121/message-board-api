@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const router = require('express').Router();
 const Users = require('./usersModel');
-const {checkUsernameTaken, checkPayload, checkDeletePossible} = require('./usersMiddleware');
+const {checkUsernameTaken, checkPayload, checkDeletePossible, checkQuestionAnswer} = require('./usersMiddleware');
 
 router.get('/', (req, res, next) => {
     Users.findAll().then(result => {
@@ -32,7 +32,7 @@ router.put('/:id', (req, res, next) => {
     }).catch(err => next(err));
 })
 
-router.post('/register', checkPayload, checkUsernameTaken, (req, res, next) => {
+router.post('/register', checkPayload, checkQuestionAnswer, checkUsernameTaken, (req, res, next) => {
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 8);
     user.password = hash;
