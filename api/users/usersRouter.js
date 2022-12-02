@@ -3,7 +3,13 @@ const jwt = require('jsonwebtoken');
 
 const router = require('express').Router();
 const Users = require('./usersModel');
-const {checkUsernameTaken, checkPayload, checkDeletePossible, checkQuestionAnswer} = require('./usersMiddleware');
+const {
+    checkUsernameTaken, 
+    checkPayload, 
+    checkDeletePossible, 
+    checkQuestionAnswer,
+    checkResetIsValid,
+    } = require('./usersMiddleware');
 
 router.get('/', (req, res, next) => {
     Users.findAll().then(result => {
@@ -30,6 +36,10 @@ router.put('/:id', (req, res, next) => {
     Users.updateUser(id, changes).then(result => {
         res.status(200).json(result);
     }).catch(err => next(err));
+})
+
+router.post('/reset-checks', checkResetIsValid, (req, res, next) => {
+    res.status(200).json({message: "Checks passed, proceed"});
 })
 
 router.post('/register', checkPayload, checkQuestionAnswer, checkUsernameTaken, (req, res, next) => {

@@ -56,10 +56,44 @@ function checkPayload(req, res, next) {
     next();
 }
 
+async function checkResetIsValid(req, res, next) {
+    const {username, security_question, security_question_answer} = req.body;
+    if (username == null || username.trim() === '') {
+        res.status(400).json({message: "I need to know who's password it is I'm resetting."})
+        return;
+    }
+    if (security_question === '') {
+        res.status(400).json({message: "I need the security question to verify who you are."})
+        return;
+    }
+    if (security_question_answer == null || security_question_answer.trim() === "") {
+        res.status(400).json({message: "Answer the question. The question alone is meaningless."})
+        return;
+    }
+    await Users.findByUsername(username).then(result => {
+        if (result == null) {
+            res.status(400).json({message: "This user doesn't exist. Go register!"});
+            return;
+        } else {
+            if (result.security_question !== security_question) {
+                res.status(400).json({message: "Your question and answer do not match. Request denied."})
+                return;
+            } 
+            if (result.security_question_answer !== security_question_answer) {
+                res.status(400).json({message: "Your question and answer do not match. Request denied."})
+                return;
+            }
+            req.body.user_id = result.user_id;
+           next();
+        }
+    })
+    
+}
 
 module.exports = {
     checkUsernameTaken,
     checkPayload,
     checkDeletePossible,
     checkQuestionAnswer,
+    checkResetIsValid,
 }
