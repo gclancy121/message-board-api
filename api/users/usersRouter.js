@@ -9,6 +9,7 @@ const {
     checkDeletePossible, 
     checkQuestionAnswer,
     checkResetIsValid,
+    checkUpdateOkay,
     } = require('./usersMiddleware');
 
 router.get('/', (req, res, next) => {
@@ -30,7 +31,7 @@ router.get('/:username', (req, res, next) => {
         res.status(200).json(result);
     }).catch(err => next(err));
 })
-router.put('/:id', (req, res, next) => {
+router.put('/:id', checkUpdateOkay, (req, res, next) => {
     const id = req.params.id;
     const changes = req.body;
     Users.updateUser(id, changes).then(result => {

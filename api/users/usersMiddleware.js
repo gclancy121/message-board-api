@@ -56,6 +56,23 @@ function checkPayload(req, res, next) {
     next();
 }
 
+function checkUpdateOkay(req, res, next) {
+    const {about_me, fav_waifu, profile_picture} = req.body;
+    if (about_me == null || about_me.trim() === "") {
+        res.status(400).json({message: "You have to have an about me section! How else will people know you?"})
+        return;
+    } 
+    if (fav_waifu == null || fav_waifu.trim() === '') {
+        res.status(400).json({message: "You have to have a favorite waifu! Every weeb has one!"})
+        return;
+    }
+    if (profile_picture == null || profile_picture.trim() === '') {
+        res.status(400).json({message: "You have to have a profile picture! You can't just have a blank picture, how will anyone recognize you?"})
+        return;
+    }
+    next();
+}
+
 async function checkResetIsValid(req, res, next) {
     const {username, security_question, security_question_answer} = req.body;
     if (username == null || username.trim() === '') {
@@ -96,4 +113,5 @@ module.exports = {
     checkDeletePossible,
     checkQuestionAnswer,
     checkResetIsValid,
+    checkUpdateOkay,
 }
