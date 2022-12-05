@@ -10,6 +10,7 @@ const {
     checkQuestionAnswer,
     checkResetIsValid,
     checkUpdateOkay,
+    checkNewPasswordValid,
     } = require('./usersMiddleware');
 
 router.get('/', (req, res, next) => {
@@ -40,7 +41,16 @@ router.put('/:id', checkUpdateOkay, (req, res, next) => {
 })
 
 router.post('/reset-checks', checkResetIsValid, (req, res, next) => {
-    res.status(200).json({message: "Checks passed, proceed"});
+    res.status(200).json({message: "Checks passed, proceed", id: req.body.user_id});
+})
+
+router.patch('/reset-password', checkNewPasswordValid, (req, res, next) => {
+    const hash = bcrypt.hashSync(req.body.password, 8);
+    const newPassword = {password: hash};
+
+    Users.updateUser(req.body.id, newPassword).then(result => {
+        res.status(200).json({message: "success"})
+    })
 })
 
 router.post('/register', checkPayload, checkQuestionAnswer, checkUsernameTaken, (req, res, next) => {

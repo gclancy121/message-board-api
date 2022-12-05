@@ -53,6 +53,27 @@ function checkPayload(req, res, next) {
         res.status(400).json({message: "You need a username and a password! Gotta keep safe in these times."})
         return;
     }
+    if (password.trim().length < 8) {
+        res.status(400).json({message: "Your password is too short! It has to be at least 8 characters long."})
+    }
+    next();
+}
+
+function checkNewPasswordValid(req, res, next) {
+    const {password, newPassword} = req.body
+    if (password == null || password.trim() === '') {
+        res.status(400).json({message: "You need a password! C'mon, you know this."})
+        return;
+    } else if (password.trim().length < 8) {
+        res.status(400).json({message: "Your password is too short! Pick a better one that's at least 8 characters long."})
+        return;
+    } else if (newPassword == null || newPassword.trim() === '') {
+        res.status(400).json({message: "You need to confirm your new password!"})
+        return;
+    } else if (newPassword !== password) {
+        res.status(400).json({message: "Your passwords do not match!"})
+        return;
+    }
     next();
 }
 
@@ -69,7 +90,7 @@ function checkUpdateOkay(req, res, next) {
     if (profile_picture == null || profile_picture.trim() === '') {
         res.status(400).json({message: "You have to have a profile picture! You can't just have a blank picture, how will anyone recognize you?"})
         return;
-    }
+    } 
     next();
 }
 
@@ -114,4 +135,5 @@ module.exports = {
     checkQuestionAnswer,
     checkResetIsValid,
     checkUpdateOkay,
+    checkNewPasswordValid,
 }
