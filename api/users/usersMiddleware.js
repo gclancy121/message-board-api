@@ -55,6 +55,7 @@ function checkPayload(req, res, next) {
     }
     if (password.trim().length < 8) {
         res.status(400).json({message: "Your password is too short! It has to be at least 8 characters long."})
+        return;
     }
     next();
 }
