@@ -68,7 +68,7 @@ router.post('/login', checkPayload, (req, res, next) => {
     Users.findByUsername(username).then(user => {
         if (user && bcrypt.compareSync(password, user.password)) {
             const token = generateToken(user);
-            res.status(200).json({token: token, message: `Welcome back to Weeb Central, ${username}!`});
+            res.status(200).json({token: token, message: `Welcome back to Weeb Central, ${username}!`, username: username});
         } else {
             res.status(401).json({message: "Hey, that information is invalid! Fix it!"});
         }
