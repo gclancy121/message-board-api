@@ -14,7 +14,13 @@ IMPORTANT: No user data is created by default - you must create your own with th
 
 [GET] - /users/:username: Returns all information about a specific username.
 
+[GET] - /users/byid/:id: Returns all information about a specific ID. 
+
 [PUT] - /users/:id: Allows a user to update their profile and returns the updated user profile. 
+
+[POST] - /users/reset-checks: Posts to make sure the information for a password reset is valid.
+
+[POST] - /users/reset-password: Resets the user password. Passes through /reset-checks in the site. 
 
 [POST] - /users/register: Allows a user to add their credentials to a database, allowing them to log in and access the waifus. Payload must look like this: {username: "username", password: "password"}. Will throw error messages if any part of the payload is incorrect. 
 
@@ -27,7 +33,9 @@ IMPORTANT: No user data is created by default - you must create your own with th
 
 [GET] - /waifus/:name: Fetch a waifu via a specific name. Name must be in params.
 
-[GET] - /waifus/id/:id : Fetch a waifu via specific ID. ID must be in params. 
+[GET] - /waifus/id/:id: Fetch a waifu via specific ID. ID must be in params. 
+
+[PUT] - /waifus/id/:id: Input information about a specific waifu via ID. ID must be in params. 
 
 [POST] - /waifus: Allows users to post a new waifu to the database. Payload must look like this: {waifu_name: "name", waifu_description: "description"}. Will throw error messages if any part of the payload is incorrect. 
 
@@ -35,6 +43,8 @@ IMPORTANT: No user data is created by default - you must create your own with th
 
 --- Posts Endpoints ---
 [GET] - /posts: Allows users to access all posts.
+
+[GET] - /posts/post-num/:id: Fetch the number of posts made by a specific user via ID. 
 
 [GET] - /posts/:post_id: Allows users to access a specific post using the post ID.
 
@@ -46,5 +56,8 @@ IMPORTANT: No user data is created by default - you must create your own with th
 [GET] - /comments/:id - Fetches the comments on a post via the post_id.
 
 [POST] - /comments/ - Posts a new comment on the post. 
+
+--- Complaints Endpoints ---
+[POST] - /complaints/ - Posts a new complaint to the database.
 
 To give an example of how waifu data is stored, there are a few examples in /data/seeds/create_waifu_data. Use the generated information as a guide for how the rest of the waifus must look. 
